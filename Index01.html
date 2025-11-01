@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qual kit do <br> ENEM  é a sua cara?</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    color: #333;
+    padding: 20px;
+  }
+  h1 {
+    color: #d32f2f;
+  }
+  .container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  button {
+    background: #d32f2f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  button:hover {
+    background: #b71c1c;
+  }
+  .resultado {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #ffe082;
+  }
+  .lgpd {
+    font-size: 14px;
+    margin-top: 15px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+<center>    <h1>👉 Qual kit do <br>ENEM<br> é a sua cara?</h1></center>
+    <p>O ENEM está chegando! 😱</p>
+    <p>Escreva seu nome e responda apenas 1 pergunta rápida para descobrir qual kit combina com o seu estilo de preparação. No final, você poderá retirar o seu kit! ✨</p>
+    
+    <form id="quizForm">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="estilo">Meu estilo de estudos é:</label>
+      <select id="estilo" name="estilo" required>
+        <option value="">-- Escolha uma opção --</option>
+        <option value="a">Gosto de revisar com foco total em resumos!</option>
+        <option value="b">Aprendo melhor brincando, com desafios e quizzes!</option>
+        <option value="c">Às vezes preciso mais de motivação do que de conteúdo!</option>
+      </select>
+
+      <div class="lgpd">
+        <input type="checkbox" id="lgpd" required>
+        <label for="lgpd">Autorizo que meu nome e telefone sejam utilizados para receber informações sobre educação conforme a LGPD.</label>
+      </div>
+
+      <button type="submit">Descobrir meu kit!</button>
+    </form>
+
+    <div id="resultado" class="resultado" style="display:none;"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('quizForm');
+    const resultadoDiv = document.getElementById('resultado');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const nome = document.getElementById('nome').value.trim();
+      const estilo = document.getElementById('estilo').value;
+
+      if (!nome || !estilo) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+      }
+
+      let mensagem = '';
+
+      if (estilo === 'a') {
+        mensagem = `Você é focado(a) e estratégico(a), ${nome}! Seu estilo é de quem gosta de estar preparado(a) para tudo. Vá pegar seu **Kit Revisão** e garanta os últimos ajustes antes da prova!`;
+      } else if (estilo === 'b') {
+        mensagem = `Você adora aprender de forma leve e divertida, ${nome}!\nSeu foco é transformar desafios em jogo. Seu **Kit Quiz** está esperando por você — bora jogar e revisar de um jeito diferente!`;
+      } else if (estilo === 'c') {
+        mensagem = `Você é pura energia e inspiração, ${nome}!\nSabe que o mais importante é acreditar em si mesmo(a). Seu **Kit Motivacional** vem com boas vibrações pra te inspirar em sua Prova!`;
+      }
+
+      resultadoDiv.style.display = 'block';
+      resultadoDiv.textContent = mensagem;
+
+      // Criar link para WhatsApp
+      const telefone = '+5512988329366';
+      const mensagemWhats = encodeURIComponent(`Olá, ${nome}.\n${mensagem}`);
+      const linkWhats = `https://wa.me/${telefone.replace(/\D/g,'')}?text=${mensagemWhats}`;
+
+      resultadoDiv.innerHTML += `<p>📲 <a href="${linkWhats}" target="_blank">Clique aqui para enviar o resultado via WhatsApp, mostre a tela de seu celular e retire o seu Kit ao avaliador!</a></p>`;
+    });
+  </script>
+</body>
+</html>
